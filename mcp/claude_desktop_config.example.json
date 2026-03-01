@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "markitdown": {
+      "command": "docker",
+      "args": [
+        "compose",
+        "--profile", "mcp",
+        "-f", "/ABSOLUTE/PATH/TO/docs-for-ai/docker-compose.yml",
+        "run", "--rm", "-T", "mcp"
+      ],
+      "env": {}
+    }
+  }
+}

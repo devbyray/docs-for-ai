@@ -1,0 +1,36 @@
+services:
+  api:
+    build: ./api
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Optional: docker compose --profile frontend up
+  frontend:
+    build: ./frontend
+    restart: unless-stopped
+    ports:
+      - "4000:3000"
+    depends_on:
+      api:
+        condition: service_healthy
+    profiles:
+      - frontend
+
+  # Optional: docker compose --profile mcp run --rm -T mcp
+  mcp:
+    build: ./mcp
+    environment:
+      MARKITDOWN_API_URL: http://api:8000
+    depends_on:
+      api:
+        condition: service_healthy
+    stdin_open: true
+    tty: false
+    profiles:
+      - mcp
