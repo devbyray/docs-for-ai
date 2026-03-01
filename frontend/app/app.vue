@@ -104,7 +104,7 @@ async function convert() {
   try {
     const form = new FormData()
     form.append('file', file.value)
-    const res = await $fetch<{ markdown: string }>('/api/convert', {
+    const res = await $fetch<{ markdown: string }>('/v1/convert', {
       method: 'POST',
       body: form,
     })

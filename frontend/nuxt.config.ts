@@ -4,6 +4,7 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
   routeRules: {
     '/api/**': { proxy: 'http://api:8000/**' },
+    '/v1/**': { proxy: 'http://api:8000/v1/**' },
     '/docs': { proxy: 'http://api:8000/docs' },
     '/redoc': { proxy: 'http://api:8000/redoc' },
     '/openapi.json': { proxy: 'http://api:8000/openapi.json' },

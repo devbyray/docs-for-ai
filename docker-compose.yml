@@ -4,6 +4,9 @@ services:
     restart: unless-stopped
     ports:
       - "8000:8000"
+    env_file:
+      - path: ./api/.env
+        required: false      # falls back to defaults when .env doesn't exist
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
       interval: 10s
